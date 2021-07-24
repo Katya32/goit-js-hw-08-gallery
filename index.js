@@ -42,6 +42,7 @@ const modalIsClose = (e) =>{ //функция закрытия модально�
         modalImageRef.src = "";
         modalImageRef.alt = "";
         modalImageRef.dataset.index = "";
+        window.removeEventListener("keydown", closeModalEscAndSlider);
     }
     return;
 }
@@ -56,15 +57,16 @@ const closeModalEscAndSlider = (e) => { //при нажатии на клави�
         modalImageRef.src = "";
         modalImageRef.alt = "";
         modalImageRef.dataset.index = "";
+        window.removeEventListener("keydown", closeModalEscAndSlider);
     };
   
     let currentIndexImageInModal = Number(modalImageRef.dataset.index)//в переменную currentIndexImageInModal записываем индекс текущей картинки в модальном окне
 
-    if(e.key === "ArrowRight" && currentIndexImageInModal <= galleryItems.length) { //если нажимаем ArrowRight и индекс <= длины массива
+    if(e.key === "ArrowRight" && currentIndexImageInModal <= galleryItems.length -2) { //если нажимаем ArrowRight и индекс <= длины массива
         modalImageRef.src = galleryItems[currentIndexImageInModal + 1 ].original; // в src текищей картинки перезаписывается src следующей картинки
         modalImageRef.dataset.index = currentIndexImageInModal + 1;// а в data-index текущий индекс +1
     } 
-    if(e.key === "ArrowLeft" && currentIndexImageInModal >= 0) {
+    if(e.key === "ArrowLeft" && currentIndexImageInModal > 0) {
         modalImageRef.src = galleryItems[currentIndexImageInModal-1].original;
         modalImageRef.dataset.index = currentIndexImageInModal -1;
     }
