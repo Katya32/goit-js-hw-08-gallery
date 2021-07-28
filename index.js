@@ -34,6 +34,7 @@ const modalIsOpen = (e)=>{ //функция открытия модальног�
     modalImageRef.src = e.target.dataset.source;
     modalImageRef.alt = e.target.alt;
     modalImageRef.dataset.index = e.target.dataset.index;
+    window.addEventListener("keydown", closeModalEscAndSlider);
 };
 
 const modalIsClose = (e) =>{ //функция закрытия модального окна
@@ -51,7 +52,7 @@ const galleryImageRef = document.querySelectorAll(".gallery__image"); //ссыл
 galleryImageRef.forEach((item, index) => item.dataset.index = `${index}`); //в каждый img добавляем атрибут data-index значением которого будет индекс
 
 const closeModalEscAndSlider = (e) => { //при нажатии на клавишу Esc атрибуты обнуляются и модальное окно закрывается
-    if(e.key === "Escape") {
+    if(e.code === "Escape") {
         modalRef.classList.remove("is-open");
         modalImageRef.src = "";
         modalImageRef.alt = "";
@@ -73,4 +74,3 @@ const closeModalEscAndSlider = (e) => { //при нажатии на клави�
 
 ulListRef.addEventListener("click", modalIsOpen);
 modalRef.addEventListener("click", modalIsClose);
-window.addEventListener("keydown", closeModalEscAndSlider);
